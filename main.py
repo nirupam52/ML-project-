@@ -22,6 +22,8 @@ def agent_init(pop_size,input_size):
 
 if __name__ == "__main__":
     
+    initial_pop = agent_init(pop_size,len(input_dat))
+    
     for x in range(generations):
         print("Gen :",x)
         # do stuff  
