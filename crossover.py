@@ -1,14 +1,20 @@
-from random import random
+from random import random, sample
 
 
-def crossover(p1,p2, input_size):
+def crossover(agents, input_size):
 
+    children = []
+    for _ in range(int(0.6*len(agents))):
+        
 
-    index = int(0.5*input_size)
-    child1 = p1.value[:index] + p2.value[index:]
-    child2 = p2.value[:index] + p1.value[index:]
+        p1,p2 = sample(agents,2)
+        index = int(0.5*input_size)
+        child1 = p1.value[:index] + p2.value[index:]
+        child2 = p2.value[:index] + p1.value[index:]
 
-    return child1,child2
+        children.append(child1,child2)
+    
+    return agents.extend(children)
 
 
 

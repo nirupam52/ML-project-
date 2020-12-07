@@ -1,17 +1,20 @@
-from random import choice,random, sample
+from random import choice,random, sample, uniform
 
 
-def mutate(specimen, probability):
+def mutate(agents, probability):
     
-    specimen_length = len(specimen.value)
-    indexes = [i for i in range(specimen_length)]
-    number = int(probability*specimen_length)
-    to_be_mutated = sample(indexes,number)
 
-    for x in to_be_mutated:
-        specimen.value[x] = specimen.value[x]*random()
+    for agent in agents:
 
-    return specimen 
+        specimen_length = len(agent.value)
+        indexes = [i for i in range(specimen_length)]
+        number = int(probability*specimen_length)
+        to_be_mutated = sample(indexes,number)
+
+        for x in to_be_mutated:
+            agent.value[x] = agent.value[x]*random()
+
+    return agents 
 
 
 

@@ -1,13 +1,15 @@
-# implement 
+import multiple_linear_regression as mlr
 
 
 
-def fitness(agent):
+def fitness(coeff,inputs,outputs):
 
-    agent.fitness = solver(agent.values)
+    fitness = mlr.multiple_linear_regression(inputs,outputs,coeff)
 
     return fitness
 
+def agent_fitness(agents, inputs, outputs):
 
-def solver(values):
-    #implement regression using LSE 
+    for agent in agents:
+
+        agent.fitness = mlr.multiple_linear_regression(inputs,outputs,agent.values)
