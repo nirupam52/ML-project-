@@ -3,7 +3,7 @@ from random import choice,random, sample, uniform
 
 def mutate(agents, probability):
     
-
+    
     for agent in agents:
 
         specimen_length = len(agent.value)

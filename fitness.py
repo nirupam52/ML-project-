@@ -12,4 +12,5 @@ def agent_fitness(agents, inputs, outputs):
 
     for agent in agents:
 
-        agent.fitness = mlr.multiple_linear_regression(inputs,outputs,agent.values)
+        agent.fitness = mlr.multiple_linear_regression(inputs,outputs,agent.value)
+        
