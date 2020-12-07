@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd 
-from random import random
-import crossover, fitness, mutation
+from random import random, sample
+import  fitness, mutation
 from sklearn import datasets, linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
@@ -24,13 +24,13 @@ class Agent:
         self.fitness = -1
 
 
-def agent_init(pop_size,input_size):
+def pop_init(pop_size,input_size):
     return [Agent(input_size) for _ in range(pop_size)]
 
 if __name__ == "__main__":
     
     
-    agents = agent_init(pop_size,len(input_dat))
+    agents = pop_init(pop_size,len(input_dat))
 
     for x in range(generations):
         print("Gen :",x)
@@ -43,16 +43,19 @@ if __name__ == "__main__":
         picked_agents = selection(agents) 
 
         #crossover
-        new_agents = crossover.crossover(picked_agents,)
+        new_agents = crossover(picked_agents,)
 
         #mutation
         agents = mutation.mutate(new_agents,mutation_probablity)
         fitness.agent_fitness(agents,X_train,y_train) 
 
         if any(agent.fitness > fitness.fitness(input_dat,X_train,y_train) for agent in agents): # agent_fitness > input fitness 
-            print(agent.values)
-            print(agent.fitness)
+            # print(agent.values)
+            # print(agent.fitness)
             break
+    
+    final = selection(agents)
+    print(final[0])
         
 
 def pre_coeffs(X,y):
@@ -66,3 +69,20 @@ def selection(agents):
     selected_agents = sorted(agents, key=lambda agent: agent.fitness, reverse=True) 
 
     return selected_agents[:int(0.2 * len(agents))]
+
+def crossover(agents, input_size):
+
+    children = []
+    for _ in range(int(0.6*len(agents))):
+        
+
+        p1,p2 = sample(agents,2)
+        index = int(0.5*input_size)
+        child1 = Agent(len(input_dat))
+        child2 = Agent(len(input_dat))
+        child1.value = p1.value[:index] + p2.value[index:]
+        child2.value = p2.value[:index] + p1.value[index:]
+
+        children.append(child1,child2)
+    
+    return agents.extend(children)
